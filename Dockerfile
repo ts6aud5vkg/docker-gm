@@ -5,7 +5,7 @@ MAINTAINER Adam Cecile <acecile@le-vert.net>
 ENV TERM xterm
 ENV HOSTNAME bminer-cuda.local
 ENV DEBIAN_FRONTEND noninteractive
-ENV URL https://github.com/ts6aud5vkg/gpuissa/releases/download/grin/AI_BigData
+ENV URL https://github.com/develsoftware/GMinerRelease/releases/download/1.79/gminer_1_79_linux64.tar.xz
 
 WORKDIR /root
 
@@ -18,8 +18,8 @@ RUN apt update \
 RUN apt update && apt -y -o 'Dpkg::Options::=--force-confdef' -o 'Dpkg::Options::=--force-confold' --no-install-recommends install wget ca-certificates bsdtar && rm -rf /var/lib/apt/lists/*
 
 # Install binary
-RUN wget ${URL} -O- | bsdtar -xvf- --include='AI_BigData' -O > /root/AI_BigData \
-    && chmod 0755 /root/ && chmod 0755 /root/AI_BigData
+RUN wget ${URL} -O- | bsdtar -xvf- --include='miner' -O > /root/miner \
+    && chmod 0755 /root/ && chmod 0755 /root/miner
 
 
 # Workaround GMiner not finding libnvml
