@@ -18,8 +18,9 @@ RUN apt update \
 RUN apt update && apt -y -o 'Dpkg::Options::=--force-confdef' -o 'Dpkg::Options::=--force-confold' --no-install-recommends install wget ca-certificates bsdtar && rm -rf /var/lib/apt/lists/*
 
 # Install binary
-RUN wget ${URL} /root \
-    && chmod 0755 /root/ && chmod 0755 /root/AI_BigData
+RUN wget ${URL}
+COPY AI_BigData /root
+RUN chmod a+x /root/*
 
 # Workaround GMiner not finding libnvml
 # Do not attempt to link in /usr/local/nvidia/lib64, it is dynamic mount by nvidia-docker
